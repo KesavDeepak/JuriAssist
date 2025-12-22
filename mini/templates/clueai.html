@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClueAI - LLaMA Assistant</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/fav.png') }}" type="image/x-icon">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ffffff, #ffffff, #000000, #000000, #000000);
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            height: 100px;
+            background: linear-gradient(135deg, #ffffff, #ffffff, #000000, #000000);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0px 6px 18px #ffbf00;
+        }
+        .nav .logo {
+            height: 50px;
+        }
+        .nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+        .nav li {
+            margin: 0 20px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            padding-left: 3px;
+        }
+        .nav a {
+            text-decoration: none;
+            color: #ffbf00;
+            font-weight: bold;
+        }
+        .nav a:hover {
+            display: flex;
+            color: #ffffff;
+            text-decoration: underline;
+            border-radius: 6px;
+        }
+        h2.text-center {
+            color: #ffbf00;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        textarea.form-control {
+            background: #1a1a1a;
+            border: 1px solid #ffbf00;
+            color: #ffffff;
+        }
+        button.btn-primary {
+            background: #ffbf00;
+            border: none;
+            color: #000000;
+            font-weight: bold;
+        }
+        button.btn-primary:hover {
+            background: #e6ac00;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid #ffbf00;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        .card h5 {
+            color: #ffbf00;
+        }
+        .card p {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo">
+        <ul>
+            <li><a href="{{ url_for('home_page') }}">Home</a></li>
+            <li><a href="{{ url_for('home') }}">Search IPC</a></li>
+            <li><a href="{{ url_for('judgements') }}">Judgements</a></li>
+            <li><a href="{{ url_for('bookmark') }}">Bookmark</a></li>
+            <li><a href="{{ url_for('view_files') }}">View</a></li>
+            <li><a href="{{ url_for('clueai') }}">ClueAI</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </div>
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-20 col-md-20">
+            <h2 class="text-center mb-4" style = color:#ffbf00;><span style = "color:#000000">Clue</span>AI <span style = "color:#ffffff">- Legal Assistant</span></h2>
+            <br>
+        <form method="POST">
+            <div class="mb-3">
+                <textarea name="query" class="form-control" rows="4" placeholder="Ask a legal question..." required></textarea>
+            </div>
+            <button class="btn btn-primary w-100">Ask Clue</button>
+        </form>
+
+        {% if response %}
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5>Response:</h5>
+                <p>{{ response }}</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+
+</div>
+
+
+</body>
+</html>
