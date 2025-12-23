@@ -51,3 +51,8 @@ JuriAssist bridges this gap by providing:
 ```bash
 git clone https://github.com/KesavDeepak/JuriAssist.git
 cd JuriAssist
+```
+
+### Output
+<img width="1919" height="930" alt="Screenshot 2025-12-22 141124" src="https://github.com/user-attachments/assets/60aeef0c-3c7f-47ea-9471-df603c53087e" />
+
