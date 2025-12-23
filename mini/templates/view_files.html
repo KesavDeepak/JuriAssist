@@ -1,0 +1,128 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Files - JuriAssist</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/fav.png') }}" type="image/x-icon">
+    <style>
+        .tab-buttons button {
+            background: #000000;
+            color: #ffbf00;
+            border: 1px solid #ffbf00;
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .tab-buttons button.active {
+            background: #ffbf00;
+            color: #000000;
+        }
+        .tab-content {
+            display: none;
+            margin-top: 20px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body style="min-height: 130vh;">
+    <div class="nav">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="" class="logo">
+        <ul>
+            <li><a href="{{ url_for('home_page') }}">Home</a></li>
+            <li><a href="{{ url_for('home') }}">Search IPC</a></li>
+            <li><a href="{{ url_for('judgements') }}">Judgements</a></li>
+            <li><a href="{{ url_for('bookmark') }}">Bookmark</a></li>
+            <li><a href="{{ url_for('view_files') }}">View</a></li>
+            <li><a href="{{ url_for('clueai') }}">ClueAI</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </div>
+
+```
+<div class="container" style="max-width: 900px; margin: 40px auto; padding: 20px; display: block;">
+    <h2 class="text-center mb-4" style="color: #ffbf00; font-weight: bold;">📂 View Files & Records</h2>
+
+    
+    <div class="tab-buttons">
+        <button class="active" onclick="showTab('files')">Uploaded Files</button>
+        <button onclick="showTab('ipc')">IPC Sections</button>
+        <button onclick="showTab('judgements')">Judgements</button>
+    </div>
+
+    
+    <div id="files" class="tab-content active card shadow" style="padding: 20px; border-radius: 12px; background: rgba(255,255,255,0.08); border: 1px solid #ffbf00;">
+        <h4 style="color: #ffbf00;">📄 Uploaded Files</h4>
+        {% if uploaded_files %}
+            <ul style = "list-style-type: none;">
+            {% for file in uploaded_files %}
+                <li><a href="{{ url_for('download_file', filename=file) }}" style="color:#000000;">{{ file }}</a></li>
+
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p style="color:#ffffff;">No files uploaded yet.</p>
+        {% endif %}
+    </div>
+
+    <div id="ipc" class="tab-content card shadow" style="padding: 20px; border-radius: 12px; background: rgba(255,255,255,0.08); border: 1px solid #ffbf00;">
+        <h4 style="color: #ffbf00;">⚖️ Saved IPC Sections</h4>
+        {% if ipc_sections %}
+            <ul>
+            {% for ipc in ipc_sections %}
+                <li style="color:#ffffff;">{{ ipc }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p style="color:#ffffff;">No IPC sections saved yet.</p>
+        {% endif %}
+    </div>
+
+
+    <div id="judgements" class="tab-content card shadow" style="padding: 20px; border-radius: 12px; background: rgba(255,255,255,0.08); border: 1px solid #ffbf00;">
+        <h4 style="color: #ffbf00;">📑 Saved Judgements</h4>
+        {% if judgements %}
+            <ul>
+            {% for judgement in judgements %}
+                <li style="color:#ffffff;">{{ judgement }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p style="color:#ffffff;">No judgements saved yet.</p>
+        {% endif %}
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="alert alert-info" style="background:#000000; color:#ffbf00; border:1px solid #ffbf00; padding:15px; border-radius:6px; margin-top:20px;">
+        {% for message in messages %}
+        {{ message }}<br>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+</div>
+
+<script>
+    function showTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+        document.querySelectorAll('.tab-buttons button').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+</script>
+```
+
+</body>
+</html>
+
+
+
